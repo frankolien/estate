@@ -1,4 +1,4 @@
-# Estate Management Platform - Backend
+# Estate Management Platform 
 
 A comprehensive real estate management platform built with Spring Boot that provides all-in-one solutions for buying, selling, renting, and investing in real estate properties.
 
@@ -324,10 +324,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Support
 
-For support and questions:
-- Email: support@estateplatform.com
-- Documentation: [API Docs](http://localhost:8080/swagger-ui.html)
-- Issues: [GitHub Issues](https://github.com/your-repo/estate/issues)
 
 ---
 
