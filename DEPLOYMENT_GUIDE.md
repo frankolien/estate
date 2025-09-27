@@ -424,4 +424,74 @@ curl http://localhost:8080/actuator/health/diskSpace
 
 ---
 
+## 📚 API Documentation
+
+### Authentication Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register new user |
+| POST | `/api/auth/login` | User login |
+| POST | `/api/auth/refresh` | Refresh JWT token |
+
+### User Management
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/users` | Get all users |
+| GET | `/api/users/{id}` | Get user by ID |
+| GET | `/api/users/email/{email}` | Get user by email |
+| GET | `/api/users/type/{userType}` | Get users by type |
+| POST | `/api/users` | Create new user |
+| PUT | `/api/users/{id}` | Update user |
+| DELETE | `/api/users/{id}` | Delete user |
+
+### Property Management
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/properties` | Get all properties (paginated) |
+| GET | `/api/properties/{id}` | Get property by ID |
+| GET | `/api/properties/user/{userId}` | Get properties by user |
+| GET | `/api/properties/type/{propertyType}` | Get properties by type |
+| GET | `/api/properties/listing/{listingType}` | Get properties by listing type |
+| GET | `/api/properties/city/{city}` | Get properties by city |
+| GET | `/api/properties/state/{state}` | Get properties by state |
+| GET | `/api/properties/featured` | Get featured properties |
+| GET | `/api/properties/search?keyword={keyword}` | Search properties |
+| GET | `/api/properties/filter` | Advanced property filtering |
+| POST | `/api/properties` | Create new property |
+| PUT | `/api/properties/{id}` | Update property |
+| DELETE | `/api/properties/{id}` | Delete property |
+
+### Advanced Filtering
+
+The `/api/properties/filter` endpoint supports multiple query parameters:
+
+- `minPrice` / `maxPrice`: Price range
+- `city` / `state`: Location filters
+- `propertyType`: Type of property (APARTMENT, HOUSE, etc.)
+- `listingType`: Listing type (BUY, SELL, RENT, LEASE)
+- `minBedrooms` / `maxBedrooms`: Bedroom count range
+- `minBathrooms` / `maxBathrooms`: Bathroom count range
+- `page` / `size`: Pagination parameters
+
+## 🔐 Security Features
+
+- **JWT Authentication**: Secure token-based authentication
+- **Role-based Access Control**: Different access levels for different user types
+- **Password Encryption**: BCrypt password hashing
+- **CORS Configuration**: Cross-origin resource sharing support
+- **Input Validation**: Comprehensive request validation
+
+## 🏢 User Types
+
+The platform supports five user types:
+
+1. **LANDLORD**: Property owners who list properties for rent/sale
+2. **AGENT**: Real estate agents managing multiple listings
+3. **TENANT**: Users looking for rental properties
+4. **INVESTOR**: Users interested in property investment
+5. **ADMIN**: Platform administrators
+
 **Happy Deploying! 🚀**
