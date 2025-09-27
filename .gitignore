@@ -1,0 +1,129 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+replay_pid*
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Flutter
+flutter_frontend/build/
+flutter_frontend/.dart_tool/
+flutter_frontend/.packages
+flutter_frontend/.pub-cache/
+flutter_frontend/.pub/
+flutter_frontend/build/
+flutter_frontend/ios/Flutter/Generated.xcconfig
+flutter_frontend/ios/Flutter/flutter_export_environment.sh
+flutter_frontend/ios/Flutter/App.framework
+flutter_frontend/ios/Flutter/Flutter.framework
+flutter_frontend/ios/Flutter/Flutter.podspec
+flutter_frontend/ios/Flutter/Generated.xcconfig
+flutter_frontend/ios/Flutter/ephemeral/
+flutter_frontend/ios/Flutter/app.flx
+flutter_frontend/ios/Flutter/app.zip
+flutter_frontend/ios/Flutter/flutter_assets/
+flutter_frontend/ios/Flutter/flutter_export_environment.sh
+flutter_frontend/ios/ServiceDefinitions.json
+flutter_frontend/ios/Runner/GeneratedPluginRegistrant.*
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Application specific
+uploads/
+*.log
