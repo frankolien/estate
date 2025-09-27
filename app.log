@@ -1,0 +1,605 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.6)
+
+2025-09-27T00:33:41.281+01:00  INFO 96135 --- [estate] [           main] com.example.estate.EstateApplication     : Starting EstateApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 96135 (/Users/user/springboot_projects/estate/target/estate-0.0.1-SNAPSHOT.jar started by user in /Users/user/springboot_projects/estate)
+2025-09-27T00:33:41.282+01:00 DEBUG 96135 --- [estate] [           main] com.example.estate.EstateApplication     : Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-09-27T00:33:41.282+01:00  INFO 96135 --- [estate] [           main] com.example.estate.EstateApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-09-27T00:33:42.144+01:00  INFO 96135 --- [estate] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-27T00:33:42.214+01:00  INFO 96135 --- [estate] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 9 JPA repository interfaces.
+2025-09-27T00:33:42.716+01:00  INFO 96135 --- [estate] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-09-27T00:33:42.727+01:00  INFO 96135 --- [estate] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-27T00:33:42.728+01:00  INFO 96135 --- [estate] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-09-27T00:33:42.745+01:00  INFO 96135 --- [estate] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-27T00:33:42.746+01:00  INFO 96135 --- [estate] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1426 ms
+2025-09-27T00:33:42.929+01:00  INFO 96135 --- [estate] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-27T00:33:42.968+01:00  INFO 96135 --- [estate] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-09-27T00:33:42.989+01:00  INFO 96135 --- [estate] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-27T00:33:43.166+01:00  INFO 96135 --- [estate] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-27T00:33:43.184+01:00  WARN 96135 --- [estate] [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [hibernate.temp.use_jdbc_metadata_defaults], use [hibernate.boot.allow_jdbc_metadata_access] instead
+2025-09-27T00:33:43.210+01:00  WARN 96135 --- [estate] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-27T00:33:43.218+01:00  INFO 96135 --- [estate] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [undefined/unknown]
+	Database driver: undefined/unknown
+	Database version: 2.1.214
+	Autocommit mode: undefined/unknown
+	Isolation level: <unknown>
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-27T00:33:43.897+01:00  INFO 96135 --- [estate] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    drop table if exists documents cascade 
+2025-09-27T00:33:43.905+01:00  INFO 96135 --- [estate] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-27T00:33:44.033+01:00  INFO 96135 --- [estate] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:estate_db user=SA
+2025-09-27T00:33:44.034+01:00  INFO 96135 --- [estate] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+Hibernate: 
+    drop table if exists legal_templates cascade 
+Hibernate: 
+    drop table if exists properties cascade 
+Hibernate: 
+    drop table if exists property_comments cascade 
+Hibernate: 
+    drop table if exists property_images cascade 
+Hibernate: 
+    drop table if exists property_likes cascade 
+Hibernate: 
+    drop table if exists property_reviews cascade 
+Hibernate: 
+    drop table if exists saved_searches cascade 
+Hibernate: 
+    drop table if exists users cascade 
+Hibernate: 
+    create table documents (
+        is_public boolean,
+        is_verified boolean,
+        created_at timestamp(6),
+        file_size bigint,
+        id bigint generated by default as identity,
+        property_id bigint,
+        template_id bigint,
+        updated_at timestamp(6),
+        user_id bigint,
+        file_type varchar(50),
+        original_file_name varchar(100),
+        file_name varchar(200) not null,
+        file_path varchar(500) not null,
+        description varchar(1000),
+        document_type enum ('AGREEMENT_DOCUMENT','BANK_STATEMENT','BUILDING_PLAN','CONTRACT_DOCUMENT','FINANCIAL_DOCUMENT','IDENTIFICATION_DOCUMENT','INCOME_CERTIFICATE','INSURANCE_DOCUMENT','LEGAL_DOCUMENT','OCCUPANCY_PERMIT','OTHER','PROPERTY_DOCUMENT','PROPERTY_IMAGE','PROPERTY_VIDEO','REFERENCE_LETTER','SURVEY_DOCUMENT','TAX_CLEARANCE','TITLE_DEED','UTILITY_BILL'),
+        primary key (id)
+    )
+Hibernate: 
+    create table legal_templates (
+        is_active boolean,
+        is_verified boolean,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        name varchar(100) not null,
+        description varchar(500) not null,
+        template_content TEXT,
+        version varchar(255),
+        listing_type enum ('BUY','LEASE','RENT','SELL'),
+        property_type enum ('APARTMENT','COMMERCIAL','CONDO','DUPLEX','HOUSE','INDUSTRIAL','LAND','MIXED_USE','OFFICE','PENTHOUSE','RETAIL','STUDIO','TOWNHOUSE','VILLA','WAREHOUSE'),
+        template_type enum ('BROKERAGE_AGREEMENT','BUILDING_PLAN','LAND_TITLE_DOCUMENT','LEASE_AGREEMENT','MORTGAGE_AGREEMENT','OCCUPANCY_PERMIT','PROPERTY_INSPECTION_REPORT','PROPERTY_INSURANCE_POLICY','PROPERTY_MANAGEMENT_AGREEMENT','PROPERTY_TRANSFER_DEED','PROPERTY_VALUATION_REPORT','RENTAL_AGREEMENT','SALE_CONTRACT','SURVEY_PLAN','TENANCY_AGREEMENT'),
+        primary key (id)
+    )
+Hibernate: 
+    create table properties (
+        bathrooms integer,
+        bedrooms integer,
+        has_garden boolean,
+        has_gym boolean,
+        has_pool boolean,
+        has_security boolean,
+        is_featured boolean,
+        is_furnished boolean,
+        is_pet_friendly boolean,
+        is_verified boolean,
+        latitude float(53),
+        longitude float(53),
+        lot_size integer,
+        parking_spaces integer,
+        price numeric(38,2) not null,
+        square_feet integer,
+        year_built integer,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        like_count bigint,
+        updated_at timestamp(6),
+        user_id bigint not null,
+        view_count bigint,
+        postal_code varchar(10) not null,
+        city varchar(50) not null,
+        state varchar(50) not null,
+        address varchar(100) not null,
+        title varchar(200) not null,
+        description varchar(2000) not null,
+        listing_type enum ('BUY','LEASE','RENT','SELL'),
+        property_status enum ('AVAILABLE','DRAFT','OFF_MARKET','PENDING','RENTED','SOLD'),
+        property_type enum ('APARTMENT','COMMERCIAL','CONDO','DUPLEX','HOUSE','INDUSTRIAL','LAND','MIXED_USE','OFFICE','PENTHOUSE','RETAIL','STUDIO','TOWNHOUSE','VILLA','WAREHOUSE'),
+        primary key (id)
+    )
+Hibernate: 
+    create table property_comments (
+        is_edited boolean,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        parent_comment_id bigint,
+        property_id bigint not null,
+        updated_at timestamp(6),
+        user_id bigint not null,
+        content varchar(500) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table property_images (
+        is_primary boolean,
+        sort_order integer,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        property_id bigint not null,
+        image_caption varchar(255),
+        image_url varchar(255) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table property_likes (
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        property_id bigint not null,
+        user_id bigint not null,
+        primary key (id),
+        unique (user_id, property_id)
+    )
+Hibernate: 
+    create table property_reviews (
+        is_edited boolean,
+        is_verified boolean,
+        rating integer check ((rating<=5) and (rating>=1)),
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        property_id bigint not null,
+        updated_at timestamp(6),
+        user_id bigint not null,
+        comment varchar(1000) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table saved_searches (
+        is_active boolean,
+        max_bathrooms integer,
+        max_bedrooms integer,
+        max_price numeric(38,2),
+        min_bathrooms integer,
+        min_bedrooms integer,
+        min_price numeric(38,2),
+        notification_enabled boolean,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        user_id bigint not null,
+        name varchar(100) not null,
+        description varchar(500),
+        city varchar(255),
+        listing_type varchar(255),
+        property_type varchar(255),
+        search_criteria TEXT,
+        state varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    create table users (
+        is_active boolean,
+        is_verified boolean,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        phone_number varchar(20),
+        email varchar(50) not null unique,
+        first_name varchar(50) not null,
+        last_name varchar(50) not null,
+        password varchar(120) not null,
+        bio varchar(500),
+        profile_image_url varchar(255),
+        reset_password_token varchar(255),
+        verification_token varchar(255),
+        user_type enum ('ADMIN','AGENT','INVESTOR','LANDLORD','TENANT'),
+        primary key (id)
+    )
+Hibernate: 
+    alter table if exists documents 
+       add constraint FK2a4kwuuvck1tgv64hoteoumf7 
+       foreign key (property_id) 
+       references properties
+Hibernate: 
+    alter table if exists documents 
+       add constraint FK7xlrqx5rgcoosyefaxd4efj5l 
+       foreign key (template_id) 
+       references legal_templates
+Hibernate: 
+    alter table if exists documents 
+       add constraint FKkxttj4tp5le2uth212lu49vny 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists properties 
+       add constraint FKtnyxik10x9mx26017sjnuo2nw 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists property_comments 
+       add constraint FKb5tn5b52imrsmvg5xfxrxgq0l 
+       foreign key (parent_comment_id) 
+       references property_comments
+Hibernate: 
+    alter table if exists property_comments 
+       add constraint FKtkvkincq2k45bxc2ovq1yr3j0 
+       foreign key (property_id) 
+       references properties
+Hibernate: 
+    alter table if exists property_comments 
+       add constraint FKngko7e2gokuama7oucbkfgb01 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists property_images 
+       add constraint FKemw5i1cysiorfaxfba7tgtpiu 
+       foreign key (property_id) 
+       references properties
+Hibernate: 
+    alter table if exists property_likes 
+       add constraint FKppohm53nm3ssllohljr2mgnl5 
+       foreign key (property_id) 
+       references properties
+Hibernate: 
+    alter table if exists property_likes 
+       add constraint FKkcbqq1m9oay7yaj0usl6idwmo 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists property_reviews 
+       add constraint FKbt9so3io93w6x84d2fwyrjmo6 
+       foreign key (property_id) 
+       references properties
+Hibernate: 
+    alter table if exists property_reviews 
+       add constraint FKiqbf6l5j7ce3b3ow3nmowex8p 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists saved_searches 
+       add constraint FKanhwgxvq6uwppnkiymaybnb8j 
+       foreign key (user_id) 
+       references users
+2025-09-27T00:33:44.076+01:00  INFO 96135 --- [estate] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-27T00:33:44.316+01:00  INFO 96135 --- [estate] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-27T00:33:44.750+01:00 DEBUG 96135 --- [estate] [           main] c.e.estate.security.JwtRequestFilter     : Filter 'jwtRequestFilter' configured for use
+2025-09-27T00:33:44.799+01:00  INFO 96135 --- [estate] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-09-27T00:33:45.261+01:00  WARN 96135 --- [estate] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-27T00:33:45.510+01:00  INFO 96135 --- [estate] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2025-09-27T00:33:45.602+01:00 DEBUG 96135 --- [estate] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtRequestFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-09-27T00:33:45.813+01:00  INFO 96135 --- [estate] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:estate_db'
+2025-09-27T00:33:45.863+01:00  WARN 96135 --- [estate] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-09-27T00:33:45.867+01:00  INFO 96135 --- [estate] [       2025-09-27T00:33:59.527+01:00  INFO 94952 --- [estate] [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-27T00:33:59.527+01:00  INFO 94952 --- [estate] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-27T00:33:59.534+01:00  INFO 94952 --- [estate] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2025-09-27T00:33:59.564+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/properties
+2025-09-27T00:33:59.580+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-09-27T00:33:59.594+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/properties
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.address,
+        p1_0.bathrooms,
+        p1_0.bedrooms,
+        p1_0.city,
+        p1_0.created_at,
+        p1_0.description,
+        p1_0.has_garden,
+        p1_0.has_gym,
+        p1_0.has_pool,
+        p1_0.has_security,
+        p1_0.is_featured,
+        p1_0.is_furnished,
+        p1_0.is_pet_friendly,
+        p1_0.is_verified,
+        p1_0.latitude,
+        p1_0.like_count,
+        p1_0.listing_type,
+        p1_0.longitude,
+        p1_0.lot_size,
+        p1_0.parking_spaces,
+        p1_0.postal_code,
+        p1_0.price,
+        p1_0.property_status,
+        p1_0.property_type,
+        p1_0.square_feet,
+        p1_0.state,
+        p1_0.title,
+        p1_0.updated_at,
+        p1_0.user_id,
+        p1_0.view_count,
+        p1_0.year_built 
+    from
+        properties p1_0 
+    where
+        p1_0.is_verified=true 
+        and p1_0.property_status='AVAILABLE' 
+    order by
+        p1_0.created_at desc 
+    fetch
+        first ? rows only
+2025-09-27T00:33:59.754+01:00  WARN 94952 --- [estate] [nio-8081-exec-1] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-09-27T00:35:32.234+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/register
+2025-09-27T00:35:32.234+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/properties?page=0&size=10&sortBy=createdAt&sortDir=desc
+2025-09-27T00:35:32.270+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/properties?page=0&size=10&sortBy=createdAt&sortDir=desc
+2025-09-27T00:35:32.272+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-5] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/register
+2025-09-27T00:35:32.295+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-09-27T00:35:32.295+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-09-27T00:35:32.297+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/properties?page=0&size=10&sortBy=createdAt&sortDir=desc
+2025-09-27T00:35:32.298+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-5] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/register
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.address,
+        p1_0.bathrooms,
+        p1_0.bedrooms,
+        p1_0.city,
+        p1_0.created_at,
+        p1_0.description,
+        p1_0.has_garden,
+        p1_0.has_gym,
+        p1_0.has_pool,
+        p1_0.has_security,
+        p1_0.is_featured,
+        p1_0.is_furnished,
+        p1_0.is_pet_friendly,
+        p1_0.is_verified,
+        p1_0.latitude,
+        p1_0.like_count,
+        p1_0.listing_type,
+        p1_0.longitude,
+        p1_0.lot_size,
+        p1_0.parking_spaces,
+        p1_0.postal_code,
+        p1_0.price,
+        p1_0.property_status,
+        p1_0.property_type,
+        p1_0.square_feet,
+        p1_0.state,
+        p1_0.title,
+        p1_0.updated_at,
+        p1_0.user_id,
+        p1_0.view_count,
+        p1_0.year_built 
+    from
+        properties p1_0 
+    where
+        p1_0.is_verified=true 
+        and p1_0.property_status='AVAILABLE' 
+    order by
+        p1_0.created_at desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        users
+        (bio, created_at, email, first_name, is_active, is_verified, last_name, password, phone_number, profile_image_url, reset_password_token, updated_at, user_type, verification_token, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+2025-09-27T00:35:32.589+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/login
+2025-09-27T00:35:32.591+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-7] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2025-09-27T00:35:32.592+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-09-27T00:35:32.592+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-7] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.first_name,
+        u1_0.is_active,
+        u1_0.is_verified,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.reset_password_token,
+        u1_0.updated_at,
+        u1_0.user_type,
+        u1_0.verification_token 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-09-27T00:35:32.749+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-7] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2025-09-27T00:35:55.124+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/login
+2025-09-27T00:35:55.123+01:00 DEBUG 94952 --- [estate] [io-8081-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/properties?page=0&size=10&sortBy=createdAt&sortDir=desc
+2025-09-27T00:35:55.142+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/properties?page=0&size=10&sortBy=createdAt&sortDir=desc
+2025-09-27T00:35:55.142+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2025-09-27T00:35:55.142+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-09-27T00:35:55.142+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-09-27T00:35:55.143+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-3] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+2025-09-27T00:35:55.143+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/properties?page=0&size=10&sortBy=createdAt&sortDir=desc
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.address,
+        p1_0.bathrooms,
+        p1_0.bedrooms,
+        p1_0.city,
+        p1_0.created_at,
+        p1_0.description,
+        p1_0.has_garden,
+        p1_0.has_gym,
+        p1_0.has_pool,
+        p1_0.has_security,
+        p1_0.is_featured,
+        p1_0.is_furnished,
+        p1_0.is_pet_friendly,
+        p1_0.is_verified,
+        p1_0.latitude,
+        p1_0.like_count,
+        p1_0.listing_type,
+        p1_0.longitude,
+        p1_0.lot_size,
+        p1_0.parking_spaces,
+        p1_0.postal_code,
+        p1_0.price,
+        p1_0.property_status,
+        p1_0.property_type,
+        p1_0.square_feet,
+        p1_0.state,
+        p1_0.title,
+        p1_0.updated_at,
+        p1_0.user_id,
+        p1_0.view_count,
+        p1_0.year_built 
+    from
+        properties p1_0 
+    where
+        p1_0.is_verified=true 
+        and p1_0.property_status='AVAILABLE' 
+    order by
+        p1_0.created_at desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.first_name,
+        u1_0.is_active,
+        u1_0.is_verified,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.reset_password_token,
+        u1_0.updated_at,
+        u1_0.user_type,
+        u1_0.verification_token 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-09-27T00:35:55.257+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-3] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to authenticate since password does not match stored value
+2025-09-27T00:35:55.260+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-3] o.s.s.authentication.ProviderManager     : Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-09-27T00:36:14.669+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/properties?page=0&size=10&sortBy=createdAt&sortDir=desc
+2025-09-27T00:36:14.669+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/auth/login
+2025-09-27T00:36:14.673+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/properties?page=0&size=10&sortBy=createdAt&sortDir=desc
+2025-09-27T00:36:14.673+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-5] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2025-09-27T00:36:14.674+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-09-27T00:36:14.674+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-09-27T00:36:14.674+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/properties?page=0&size=10&sortBy=createdAt&sortDir=desc
+2025-09-27T00:36:14.675+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-5] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/login
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.address,
+        p1_0.bathrooms,
+        p1_0.bedrooms,
+        p1_0.city,
+        p1_0.created_at,
+        p1_0.description,
+        p1_0.has_garden,
+        p1_0.has_gym,
+        p1_0.has_pool,
+        p1_0.has_security,
+        p1_0.is_featured,
+        p1_0.is_furnished,
+        p1_0.is_pet_friendly,
+        p1_0.is_verified,
+        p1_0.latitude,
+        p1_0.like_count,
+        p1_0.listing_type,
+        p1_0.longitude,
+        p1_0.lot_size,
+        p1_0.parking_spaces,
+        p1_0.postal_code,
+        p1_0.price,
+        p1_0.property_status,
+        p1_0.property_type,
+        p1_0.square_feet,
+        p1_0.state,
+        p1_0.title,
+        p1_0.updated_at,
+        p1_0.user_id,
+        p1_0.view_count,
+        p1_0.year_built 
+    from
+        properties p1_0 
+    where
+        p1_0.is_verified=true 
+        and p1_0.property_status='AVAILABLE' 
+    order by
+        p1_0.created_at desc 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.bio,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.first_name,
+        u1_0.is_active,
+        u1_0.is_verified,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.reset_password_token,
+        u1_0.updated_at,
+        u1_0.user_type,
+        u1_0.verification_token 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-09-27T00:36:14.764+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-5] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to authenticate since password does not match stored value
+2025-09-27T00:36:14.765+01:00 DEBUG 94952 --- [estate] [nio-8081-exec-5] o.s.s.authentication.ProviderManager     : Authentication failed with provider DaoAuthenticationProvider since Bad credentials
+2025-09-27T00:37:17.538+01:00  INFO 94952 --- [estate] [ionShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-27T00:37:17.559+01:00  INFO 94952 --- [estate] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-27T00:37:17.569+01:00  INFO 94952 --- [estate] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+Hibernate: 
+    drop table if exists documents cascade 
+Hibernate: 
+    drop table if exists legal_templates cascade 
+Hibernate: 
+    drop table if exists properties cascade 
+Hibernate: 
+    drop table if exists property_comments cascade 
+Hibernate: 
+    drop table if exists property_images cascade 
+Hibernate: 
+    drop table if exists property_likes cascade 
+Hibernate: 
+    drop table if exists property_reviews cascade 
+Hibernate: 
+    drop table if exists saved_searches cascade 
+Hibernate: 
+    drop table if exists users cascade 
+2025-09-27T00:37:17.586+01:00  INFO 94952 --- [estate] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-27T00:37:17.589+01:00  INFO 94952 --- [estate] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
