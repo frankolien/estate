@@ -205,13 +205,6 @@ The platform is designed to comply with Nigerian regulations:
 4. Push to the branch
 5. Create a Pull Request
 
-## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 📞 Support
-
-
----
 
 **Built with ❤️ for the Nigerian real estate market**
