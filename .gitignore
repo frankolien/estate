@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### md files ###
+DEPLOYMENT_GUIDE.md
+FLUTTER_FRONTEND_SUMMARY.md
+README.md
